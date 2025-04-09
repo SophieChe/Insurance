@@ -1,0 +1,160 @@
+1) Дано: firstName не указан.
+   Ожидаем: в ответе ошибка firstName не указан.
+
+   request
+   {
+        "personFirstName" : null,
+        "personLastName" : "Petrov",
+        "agreementDateFrom" : "2024-12-27",
+        "agreementDateTo" : "2025-01-12"
+   }
+
+   response
+   {
+        error:
+        "personFirstName"
+        "Must not be empty!"
+
+        "personFirstName" : null,
+        "personLastName" : null,
+        "agreementDateFrom" : null,
+        "agreementDateTo" : null
+   }
+
+
+2) Дано: lastName не указан.
+   Ожидаем: в ответе ошибка lastName не указан.
+      request
+      {
+           "personFirstName" : "Ivan",
+           "personLastName" : null,
+           "agreementDateFrom" : "2024-12-27",
+           "agreementDateTo" : "2025-01-12"
+      }
+
+      response
+      {
+           error:
+           "personLastName"
+           "Must not be empty!"
+
+           "personFirstName" : null,
+           "personLastName" : null,
+           "agreementDateFrom" : null,
+           "agreementDateTo" : null
+      }
+
+3) Дано: agreementDateFrom не указан.
+   Ожидаем: в ответе ошибка agreementDateFrom не указан.
+         request
+         {
+              "personFirstName" : "Ivan",
+              "personLastName" : "Petrov",
+              "agreementDateFrom" : null,
+              "agreementDateTo" : "2025-01-12"
+         }
+
+         response
+         {
+              error:
+              "agreementDateFrom"
+              "Must not be empty!"
+
+              "personFirstName" : null,
+              "personLastName" : null,
+              "agreementDateFrom" : null,
+              "agreementDateTo" : null
+         }
+
+4) Дано: agreementDateTo не указан.
+   Ожидаем: в ответе ошибка agreementDateTo не указан.
+            request
+            {
+                 "personFirstName" : "Ivan",
+                 "personLastName" : "Petrov",
+                 "agreementDateFrom" : "2024-12-27",
+                 "agreementDateTo" : null
+            }
+
+            response
+            {
+                 error:
+                 "agreementDateTo"
+                 "Must not be empty!"
+
+                 "personFirstName" : null,
+                 "personLastName" : null,
+                 "agreementDateFrom" : null,
+                 "agreementDateTo" : null
+            }
+
+5) Дано: allFields не указаны.
+   Ожидаем: в ответе ошибки для каждого поля.
+               request
+               {
+                    "personFirstName" : null,
+                    "personLastName" : null,
+                    "agreementDateFrom" : null,
+                    "agreementDateTo" : null
+               }
+
+               response
+               {
+                    error:
+                    "personFirstName"
+                    "Must not be empty!"
+
+                    "personLastName"
+                    "Must not be empty!"
+
+                    "agreementDateFrom"
+                    "Must not be empty!"
+
+                    "agreementDateTo"
+                    "Must not be empty!"
+
+                    "personFirstName" : null,
+                    "personLastName" : null,
+                    "agreementDateFrom" : null,
+                    "agreementDateTo" : null
+               }
+
+6) Дано: agreementDateTo < agreementDateFrom.
+   Ожидаем: в ответе ошибка agreementDateTo < agreementDateFrom.
+              request
+               {
+                    "personFirstName" : "Ivan",
+                    "personLastName" : "Petrov",
+                    "agreementDateFrom" : "2024-12-27",
+                    "agreementDateTo" : "2024-12-26"
+               }
+
+               response
+               {
+                    error:
+                    "agreementDateFrom"
+                    "Must be less then agreementDateTo!"
+
+                    "personFirstName" : null,
+                    "personLastName" : null,
+                    "agreementDateFrom" : null,
+                    "agreementDateTo" : null
+               }
+
+7) Дано: указаны все поля.
+   Ожидаем: ответ без ошибок.
+    request
+                  {
+                       "personFirstName" : "Ivan",
+                       "personLastName" : "Petrov",
+                       "agreementDateFrom" : "2024-12-27",
+                       "agreementDateTo" : "2024-12-26"
+                  }
+
+                  response
+                  {
+                       "personFirstName" : "Ivan",
+                       "personLastName" : "Petrov",
+                       "agreementDateFrom" : "2024-12-27",
+                       "agreementDateTo" : "2025-01-12"
+                  }
